@@ -3,16 +3,22 @@ package dev.arcturuz.taskmanager.mappers;
 import dev.arcturuz.taskmanager.entities.Task;
 import dev.arcturuz.taskmanager.models.TaskModel;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mapstruct.factory.Mappers;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class TaskMapperTest {
 
-    @Autowired
     private TaskMapper mapper;
+
+    @BeforeEach
+    public void setUp() {
+        this.mapper = Mappers.getMapper(TaskMapper.class);
+    }
 
     @Test
     @DisplayName("Should receive a Task Entity and create a Task Model")
