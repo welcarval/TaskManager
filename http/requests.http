@@ -1,0 +1,14 @@
+### POST request
+POST http://192.168.49.2:30885/api/tasks
+content-type: application/json
+
+{
+  "name": "Montar Planilhas",
+  "description": "montar planilhas no excel antes do almoço"
+}
+
+### GET Request
+GET http://localhost:8080/api/tasks/1
+
+### GET All
+GET http://localhost:8080/api/tasks
