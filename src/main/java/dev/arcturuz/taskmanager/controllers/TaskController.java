@@ -3,8 +3,11 @@ package dev.arcturuz.taskmanager.controllers;
 import dev.arcturuz.taskmanager.models.TaskModel;
 import dev.arcturuz.taskmanager.services.TaskService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -15,8 +18,16 @@ public class TaskController {
     private TaskService taskService;
 
     @PostMapping
-    public void saveTask(@RequestBody TaskModel model) {
-        taskService.saveTask(model);
+    public ResponseEntity<Void> saveTask(@RequestBody TaskModel model) {
+        var id = taskService.saveTask(model);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(id)
+                .toUri();
+
+        return ResponseEntity.created(location).build();
     }
 
     @GetMapping
@@ -30,7 +41,8 @@ public class TaskController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteTask(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
         taskService.deleteTask(id);
+        return  ResponseEntity.noContent().build();
     }
 }

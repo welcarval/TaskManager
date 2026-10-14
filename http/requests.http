@@ -1,5 +1,6 @@
 ### POST request
-POST http://192.168.49.2:30885/api/tasks
+#POST http://192.168.49.2:30885/api/tasks
+POST http://localhost:8080/api/tasks
 content-type: application/json
 
 {

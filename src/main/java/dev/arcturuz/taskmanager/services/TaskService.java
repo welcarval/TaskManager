@@ -17,9 +17,10 @@ public class TaskService {
     private TaskRepository repository;
     private TaskMapper mapper;
 
-    public void saveTask(TaskModel model) {
+    public Long saveTask(TaskModel model) {
         Task entity = mapper.toEntity(model);
-        repository.save(entity);
+        entity = repository.save(entity);
+        return entity.getId();
     }
 
     public TaskModel getTask(Long id) {

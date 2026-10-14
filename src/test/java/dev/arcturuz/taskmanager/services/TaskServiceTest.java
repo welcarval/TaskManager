@@ -30,21 +30,16 @@ class TaskServiceTest {
     @DisplayName("Should receive a Task Model and save it in the repository")
     public void saveTask() {
         TaskModel model = new TaskModel("Jantar", "comer proteínas");
-        Task entity = new Task();
+        Task entity = new Task(1L, "Jantar", "comer proteínas");
         entity.setName("Jantar");
         entity.setDescription("Comer proteínas");
 
         when(mapper.toEntity(model)).thenReturn(entity);
+        when(repository.save(entity)).thenReturn(entity);
 
         service.saveTask(model);
 
         verify(mapper).toEntity(model);
         verify(repository).save(entity);
-    }
-
-    @Test
-
-    public void getTask() {
-
     }
 }
